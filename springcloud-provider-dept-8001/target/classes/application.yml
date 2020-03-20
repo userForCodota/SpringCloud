@@ -1,0 +1,19 @@
+server:
+  port: 8001
+mybatis:
+  #  别名：这里对应就是springcloud-api里面放pojo的包名
+  type-aliases-package: com.chengfeng.springcloud.pojo
+  #mybatis配置文件所在位置
+  config-location: classpath:mybatis/mybatis-config.xml
+  #  mybatis映射文件所在位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+spring:
+  application:
+    #    本项目的名字
+    name: springcloud-provider-Dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource #数据源
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/db01?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
