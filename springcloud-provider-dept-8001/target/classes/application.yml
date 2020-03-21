@@ -22,7 +22,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7001/eureka/
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/,http://localhost:7003/eureka/
   instance:
     instance-id: springcloud-provider-dept-8001 #这个是页面上status的描述信息
 #info配置,点实例进去的页面会展示下面的info信息
