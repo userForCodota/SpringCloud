@@ -1,5 +1,6 @@
 package com.chengfeng.springcloud.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 //@NoArgsConstructor———————无参？
 //@Accessors(chain = true)————链式写法
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 public class Dept implements Serializable {
@@ -22,4 +24,6 @@ public class Dept implements Serializable {
     public Dept(String dname) {
         this.dname = dname;
     }
+
+
 }

@@ -11,6 +11,15 @@
 
     <artifactId>springcloud-provider-dept-hystrix-8001</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+            <version>1.4.6.RELEASE</version>
+        </dependency>
         <!--这里导入的是我们自己刚写的依赖，就可以用其内部的实体类了-->
         <dependency>
             <groupId>cn.chengfeng.springcloud</groupId>

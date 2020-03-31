@@ -3,6 +3,7 @@ package com.chengfeng.springcloud.controller;
 
 import com.chengfeng.springcloud.pojo.Dept;
 import com.chengfeng.springcloud.service.DeptService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -18,43 +19,23 @@ import java.util.List;
 public class DeptController {
     @Autowired
     private DeptService deptService;
-    @Autowired
-    private DiscoveryClient client; //获取微服务信息
 
-    @PostMapping("/dept/add")
-    public boolean addDept(Dept dept) {
-        return deptService.addDept(dept);
-    }
-
+    @HystrixCommand(fallbackMethod = "hystrixGet")
     @GetMapping("/dept/get/{id}")
     public Dept get(@PathVariable("id") Long id) {
-        return deptService.queryById(id);
-    }
-
-    @GetMapping("/dept/list")
-    public List<Dept> quaryAll() {
-        return deptService.queryAll();
-    }
-
-    //通过eureka中微服务的名称获取其信息
-    @GetMapping("/dept/discovery")
-    public Object discovery() {
-        List<String> services = client.getServices();
-        System.out.println("discovery=>services:" + services);
-        //遍历和打印信息
-        List<ServiceInstance> instances = client.getInstances("SPRINGCLOUD-PROVIDER-DEPT");
-        for (ServiceInstance instance : instances) {
-            System.out.println(
-                    "instance.getHost():" + instance.getHost() + "\n" +
-                            "instance.getInstanceId():" + instance.getInstanceId() + "\n" +
-                            "instance.getScheme():" + instance.getScheme() + "\n" +
-                            "instance.getServiceId():" + instance.getServiceId() + "\n" +
-                            "instance.getMetadata():" + instance.getMetadata() + "\n" +
-                            "instance.getPort():" + instance.getPort() + "\n" +
-                            "instance.getUri():" + instance.getUri()
-            );
-
+        Dept dept = deptService.queryById(id);
+        if (dept == null) {
+            throw new RuntimeException("id=>" + id + "，不存在该用户，或者信息无法找到");
         }
-        return this.client;
+        return dept;
+    }
+
+    //将上面的方法改造成Hystrix的熔断机制版
+    public Dept hystrixGet(@PathVariable("id") Long id) {
+//        //这里为什么链式写法报错？检查后发现IDEA2019.1需要按照lombok插件
+        return new Dept()
+                .setDeptno(id)
+                .setDname("id=>" + id + "，不存在该用户，或者信息无法找到")
+                .setDb_source("no this database in mysql");
     }
 }
