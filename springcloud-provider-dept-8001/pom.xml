@@ -11,6 +11,16 @@
     <artifactId>springcloud-provider-dept-8001</artifactId>
     <!--我们需要拿到实体类，所以要配置api module-->
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+            <version>1.4.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams</artifactId>
+            <version>1.0.3</version>
+        </dependency>
         <!--这里导入的是我们自己刚写的依赖，就可以用其内部的实体类了-->
         <dependency>
             <groupId>cn.chengfeng.springcloud</groupId>
