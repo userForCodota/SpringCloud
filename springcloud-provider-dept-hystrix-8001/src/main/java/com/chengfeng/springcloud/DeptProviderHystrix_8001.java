@@ -22,7 +22,7 @@ public class DeptProviderHystrix_8001 {
 
     //增加一个servlet
     @Bean
-    public ServletRegistrationBean a() {
+    public ServletRegistrationBean getServletBean() {
         ServletRegistrationBean registrationBean = new ServletRegistrationBean(new HystrixMetricsStreamServlet());
         registrationBean.addUrlMappings("/actuator/hystrix.stream");
         return registrationBean;
