@@ -1,0 +1,12 @@
+server:
+  port: 3344
+spring:
+  application:
+    name: springcloud-config-server
+  #连接远程仓库（码云）
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/Dororo9102/springcloud-config.git
+#通过config-server可以链接到git，可以读yml文件了

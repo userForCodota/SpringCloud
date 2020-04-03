@@ -1,0 +1,8 @@
+#系统级别的配置
+spring:
+  cloud:
+    config:
+      uri: http://localhost:3344 #意思是此（3355）的应用程序启动时会去访问3344，通过3344去读github上面配置信息，可以理解为消费
+      label: master #从git 的哪个分支读
+      name: config-client #意思是读git上面名称为“config-client.yml”的文件，不需要后缀名
+      profile: test #yml文件可能会配置了多环境，这里选择里面写的其中一种环境“dev”

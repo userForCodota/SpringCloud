@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: springcloud-config-client-3355 #应用级别的配个名字就好了
