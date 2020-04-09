@@ -26,7 +26,7 @@ public class DeptConsumerController {
 
     //    feign改造的话就不是直接写死（final），而是通过autowrited，依赖注入
     @Autowired
-    private DeptClientService service = null;
+    private DeptClientService service = null;//此“DeptClientService”是来源于springcloud-api中配置了feign的接口
 
     @RequestMapping("/consumer/dept/add")
     public boolean add(Dept dept) {
